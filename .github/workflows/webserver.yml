@@ -116,7 +116,7 @@ jobs:
         run: |
           docker rm -f apache_centos7_container
           cd instrumentation/otel-webserver-module
-          docker-compose --profile centos7 up -d
+          docker compose --profile centos7 up -d
           docker ps -a
           sleep 30
           ./gradlew :test:integration:integrationTests -i
