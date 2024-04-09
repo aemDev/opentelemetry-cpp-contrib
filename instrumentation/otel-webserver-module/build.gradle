@@ -602,6 +602,9 @@ model {
         release
     }
     platforms {
+        arm {
+            architecture "arm64"
+        }
         x86 {
             architecture "x86"
         }

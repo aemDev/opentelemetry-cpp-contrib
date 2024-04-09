@@ -218,7 +218,9 @@ jobs:
   #       run: |
   #         cd instrumentation/otel-webserver-module
   #         docker buildx build -t apache_centos7_arm64 -f docker/centos7/Dockerfile \
-  #           --load . --platform linux/arm64
+  #           --load . --platform linux/arm64 --build-arg BUILD_ARCH='arm64' \
+  #           --build-arg CMAKE_ARCH='aarch64' --build-arg GOSU_ARCH='arm64' \
+  #           --build-arg JDK_ARCH='aarch64' --build-arg NGINX_ARCH='aarch64'
   #     - name: build
   #       run: |
   #         docker run -idt --platform linux/arm64 --name apache_centos7_container_arm64 apache_centos7_arm64 /bin/bash
