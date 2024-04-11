@@ -10,7 +10,7 @@ ENV GOSU_ARCH=${GOSU_ARCH}
 ARG JDK_ARCH='x64'
 ENV JDK_ARCH=${JDK_ARCH}
 
-ARG PYTHON_VERSION="2.7.8"
+ARG PYTHON_VERSION="2.7.18"
 ARG CMAKE_ARCH='x86_64'
 ARG CMAKE_VERSION="3.20"
 ARG CMAKE_0VERSION="3.20.0"
@@ -22,6 +22,7 @@ ARG APR_VERSION="1.7.0"
 ARG EXPAT_VERSION="2.3.0"
 ARG EXPAT_RVERSION="R_2_3_0"
 ARG APRUTIL_VERSION="1.6.1"
+ARG AUTOCONF_BUILD_TYPE='x86_64-unknown-linux-gnu'
 ARG AUTOCONF_VERSION="2.68"
 ARG LIBTOOL_VERSION="2.4.6"
 ARG LOG4CXX_VERSION="0.11.0"
@@ -78,7 +79,7 @@ RUN wget http://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERS
     && rm -rf Python-${PYTHON_VERSION}.tar.xz && rm -rf Python-${PYTHON_VERSION}.tar
 
 # install gosu for easy step-down from root (from https://github.com/tianon/gosu/blob/master/INSTALL.md#from-centos)
-ENV GOSU_VERSION=1.10
+ENV GOSU_VERSION=1.11
 
 RUN curl -o /usr/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-${GOSU_ARCH}" \
     && chmod +x /usr/bin/gosu \
@@ -157,7 +158,7 @@ RUN yum install m4 -y
 RUN wget --no-check-certificate https://ftp.gnu.org/gnu/autoconf/autoconf-${AUTOCONF_VERSION}.tar.gz \
     && tar xzf autoconf-${AUTOCONF_VERSION}.tar.gz  \
     && cd autoconf-${AUTOCONF_VERSION} \
-    && ./configure --prefix=/usr/ && make -j && make install && autoconf -V \
+    && ./configure --prefix=/usr/ --build=${AUTOCONF_BUILD_TYPE} && make -j && make install && autoconf -V \
     && cd .. && rm -rf autoconf-${AUTOCONF_VERSION}.tar.gz
 
 # install automake
