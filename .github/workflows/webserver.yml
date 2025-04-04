@@ -1,4 +1,4 @@
-name: webserver instrumentation CI
+name: webserver instrumentation CI.
 
 on:
   push:
